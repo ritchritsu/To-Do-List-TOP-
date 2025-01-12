@@ -1,3 +1,34 @@
+class project{
+    constructor(){ //empty parenthesis because you're making an empty list of todo items without using any parameters
+        this.todoItems = [];
+    }
+
+    addTodo(todoItem){
+        this.todoItems.push(todoItem); //push todoItem to todoItems array
+    }
+
+    removeTodo(todoItem){
+        const index = this.todoItems.indexOf(todoItem); //find the index of the item
+        if (index !== -1){ //-1 means if element is not found
+            this.todoItems.splice(index , 1); //start at index and remove 1 items.       NOTE: (index,2) means start at index and remove 2 items
+        }
+    }
+
+    displayTodos(){
+        console.log(this.todoItems); //this.todoItems is already in the class so no parameters for this function
+    }
+
+    displayTodo(index){ //passing the index as an argument
+        const todoItem = this.todoItems[index] //look for the todoItem in the array
+        if (todoItem){ //if it exists then display it
+            console.log(todoItem)
+        }
+        else{
+            console.log("Todo item not found");
+        }
+    }
+}
+
 class todoItem {
     constructor(title, notes, dueDate, priority, checklist){
         this.title = title;
@@ -7,25 +38,87 @@ class todoItem {
         this.checklist = checklist; //array of checklist items
     }
 
+    updateTitle(newTitle){
+        this.title = newTitle;
+    }
+
+    updateNotes(newNotes){
+        this.notes = newNotes;
+    }
+
+    updateDueDate(newDueDate){
+        this.dueDate = newDueDate;
+    }
+
+    updatePriority(newPriority){
+        this.priority = newPriority;
+    }
+    //UPDATE FUNCTIONS ABOVE CAN BE REFACTORED INTO ONE (keeping the functions above so you can see the improvement)
+    updateField(fieldName, newValue){
+        if (this.hasOwnProperty[fieldName]){ //if this object has title,notes,dueDate,etc.
+            this[fieldName] = newValue; //give this object's property a new value             NOTE: dont use this.fieldName because fieldName is not a property of an object. fieldName is a variable.
+        }
+        else{
+            console.log("Property '${fieldName}' does not exist");
+        }
+    }
+
+
+
+    addChecklistItem(checklistItem){
+        this.checklist.push(checklistItem); //push checklistItem to checklist array
+    }
+
+
+    updateChecklistItem(checklist){
+        const index = checklist.indexOf(checklistItem);
+        if (index !== -1){
+
+        } 
+    }
+
+
+
 }
 
+
+
+
+
 /*i have a todo object, now what do i do?
-    I should be able to add a todo 
-    I should be able to update these
+
+NOTE: CLASSES GOTTA HAVE THEIR SPECIFIC METHODS
+CLI FIRST BEFORE DOM
+
+    I should be able to add a todo (CREATE) 
+        A function to add a new to do item DONE
+        A function to add a new project with specific to do items DONE
+
+    I should be able to manipulate the DOM and see these items  (READ) A function to display
+        Function to display one to do in detail DONE
+        Function to display all items DONE
+
+    I should be able to update these (UPDATE)
         update title
         update notes
         update dueDate
         update priority
         update checklist
-    I should be able to delete these
-        delete todo item
+            A function to add, done
+            mark as done, 
+            remove a checklist item
+
+    I should be able to delete these (DELETE)
+        delete todo item DONE
         delete checklist item
         delete project
+        
     I should be able to see them be sorted by due date //maybe an array of items that are sorted by due date
+    I should be able to have a local storage so it saves my data whenever i refresh the page
     
     
     
     
-    
+
     
     */
