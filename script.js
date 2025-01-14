@@ -1,3 +1,17 @@
+class projectManager {
+    constructor() {
+        this.projects = [];
+    }
+
+    deleteProject(project) {
+        const index = this.projects.indexOf(project);
+        if (index !== -1) {
+            this.projects.splice(index, 1);
+        }
+    }
+}
+
+
 class project{
     constructor(){ //empty parenthesis because you're making an empty list of todo items without using any parameters
         this.todoItems = [];
@@ -25,6 +39,33 @@ class project{
         }
         else{
             console.log("Todo item not found");
+        }
+    }
+
+    sortTodo(){
+        this.todoItems.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    }
+
+    saveToLocalStorage() {
+        localStorage.setItem("project", JSON.stringify(this.todoItems));
+    }
+
+    loadFromLocalStorage() {
+        const data = JSON.parse(localStorage.getItem("project"));
+        if (data) {
+            this.todoItems = data.map(item => new todoItem(item.title, item.notes, item.dueDate, item.priority, item.checklist));
+        }
+    }
+
+    todoDone(todoItemName) {
+        
+        const index = this.todoItems.findIndex(todo => todo.name === todoItemName); //look into todo items array and find the index of when the todo.name is equal to todoItemName argument
+
+        if (index !== -1) {
+            this.todoItems[index].status = 'done';
+            console.log(`Todo "${todoItemName}" marked as done.`);
+        } else {
+            console.log(`Todo "${todoItemName}" not found.`);
         }
     }
 }
@@ -87,6 +128,21 @@ class todoItem {
         }
     }
 
+    checklistItemDone(checklistItemName) {
+        // Find the index of the checklist item by its name
+        const index = this.checklist.findIndex(item => item.name === checklistItemName);
+    
+        if (index !== -1) {
+            this.checklist[index].status = 'done';
+            console.log(`Checklist item "${checklistItemName}" marked as done.`);
+        } else {
+            console.log("Checklist item not found");
+        }
+    }
+    
+
+    
+
 }
 
 
@@ -114,19 +170,36 @@ CLI FIRST BEFORE DOM
         update checklist
             A function to add, :))))))))))
             a function to read :))))
-            mark as done
+            mark as done :)))))))
             remove a checklist item :))))))))
 
     I should be able to delete these (DELETE)
         delete todo item :))))))))))
-        delete checklist item 
+        delete checklist item :)))))))))))))))
         delete project
         
-    I should be able to see them be sorted by due date //maybe an array of items that are sorted by due date
-    I should be able to have a local storage so it saves my data whenever i refresh the page
+    I should be able to see them be sorted by due date //maybe an array of items that are sorted by due date :)))))))
+    I should be able to have a local storage so it saves my data whenever i refresh the page :)))))))
     
     
-    
+    -----------------------------------------------------------------------------------------------------------------------------------------
+
+    Next Steps
+
+    Test All Methods
+        Ensure methods like sorting, marking checklist items as done, and updates work as expected.
+
+    Implement a Simple UI
+        Create HTML forms and buttons for adding, editing, and deleting todoItems and projects.
+        Use event listeners to connect the UI to your methods.
+
+    Polish Features
+        Add validation (e.g., prevent adding a todoItem without a title or due date).
+        Allow users to mark todos as complete.
+
+    Think About Future Features
+        Add deadlines or reminders.
+        Categorize todos by tags or labels.
     
 
     
