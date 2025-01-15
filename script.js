@@ -3,6 +3,12 @@ class projectManager {
         this.projects = [];
     }
 
+    addProject(projectName) {
+        const newProject = new project(projectName); //make project object
+        this.projects.push(newProject); //push the project to projects array
+        console.log(`Project "${projectName}" added.`);
+    }
+
     deleteProject(project) {
         const index = this.projects.indexOf(project);
         if (index !== -1) {
@@ -145,9 +151,56 @@ class todoItem {
     
 
 }
+const projectManagerInstance = new projectManager(); //must be projectManagerInstance or other name since theres already a class named projectManager (INSTANCE NAME MUST BE DIFF FROM CLASS NAME)
+document.addEventListener("DOMContentLoaded", (event) => {
+
+    
+    addProjectGUI();
+    updateProjectSelect();
+
+   
 
 
 
+})
+
+function addProjectGUI(){
+    let project_form = document.getElementById("project-form").addEventListener("submit", (event) =>{ //once form is submitted
+
+        event.preventDefault(); //prevent page reload on form submit
+
+        const project_name = document.getElementById("project-name").value; //get text value of projectName 
+
+        if(project_name){ //if name is valid
+
+            projectManagerInstance.addProject(project_name);
+
+           updateProjectSelect(); //I still need to implement this
+           document.getElementById("project-name").value = ''
+        }
+        else{
+            alert("Please enter a project name");
+        }
+    });
+
+    
+    
+}
+
+function updateProjectSelect() {
+    const project_select = document.getElementById("project-select"); //get project-select 
+    
+    // Clear existing options
+    project_select.innerHTML = '';
+
+    // Loop through all projects and add them to the dropdown
+    projectManagerInstance.projects.forEach(project => { ///for each project,
+        const option = document.createElement("option"); //make an option element
+        option.value = project.projectName; //give option the project name
+        option.textContent = project.projectName;
+        project_select.appendChild(option);//append it to project-select
+    });
+}
 
 
 /*i have a todo object, now what do i do?
