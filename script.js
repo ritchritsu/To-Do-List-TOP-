@@ -13,8 +13,9 @@ class projectManager {
 
 
 class project{
-    constructor(){ //empty parenthesis because you're making an empty list of todo items without using any parameters
+    constructor(projectName){ //empty parenthesis because you're making an empty list of todo items without using any parameters
         this.todoItems = [];
+        this.projectName = projectName;
     }
 
     addTodo(todoItem){
@@ -176,7 +177,7 @@ CLI FIRST BEFORE DOM
     I should be able to delete these (DELETE)
         delete todo item :))))))))))
         delete checklist item :)))))))))))))))
-        delete project
+        delete project :))))))))))))
         
     I should be able to see them be sorted by due date //maybe an array of items that are sorted by due date :)))))))
     I should be able to have a local storage so it saves my data whenever i refresh the page :)))))))
@@ -187,20 +188,22 @@ CLI FIRST BEFORE DOM
     Next Steps
 
     Test All Methods
-        Ensure methods like sorting, marking checklist items as done, and updates work as expected.
-
-    Implement a Simple UI
-        Create HTML forms and buttons for adding, editing, and deleting todoItems and projects.
-        Use event listeners to connect the UI to your methods.
+        Ensure methods like sorting, marking checklist items as done, and updates work as expected. :)))))))))
 
     Polish Features
-        Add validation (e.g., prevent adding a todoItem without a title or due date).
-        Allow users to mark todos as complete.
+        Add validation (e.g., prevent adding a todoItem without a title or due date). :)))))))
+        Allow users to mark todos as complete. :))))
 
-    Think About Future Features
-        Add deadlines or reminders.
-        Categorize todos by tags or labels.
     
+      Implement a Simple UI
+        Create HTML forms and buttons for adding, editing, and deleting todoItems and projects. :))))))))
+        Use event listeners to connect the UI to your methods.
 
+        ADD TODO ITEM LOGIC 
+            Get element and add an event listener for submission. get title and due date value (getElementById and .value) if title and due date exist, create a new todoItem, yada yada)
+ 
+    
+    
+  
     
     */

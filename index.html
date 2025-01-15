@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
 </head>
 <body>
-    
+  <header>
+    <h1>Todo App</h1>
+  </header>
+  <main>
+
+    <section id="project-section"> <!--Section for Projects-->
+        <h2>Projects</h2>
+        <form id="project-form"> <!--Form for entering project name and submitting -->
+          <input type="text" id="project-name" placeholder="Enter project name" required />
+          <button type="submit">Add Project</button>
+        </form>
+        <select id="project-select"></select> <!-- Select is for dropdowns where you can add <options>-->
+        <button id="delete-project-btn">Delete Selected Project</button> <!--This button doesn't need a form since you're not submitting or editing smth. You're just pressing a delete button that runs delete()-->
+      </section>
+      
+
+    <section id="todo-section"> <!--Section for Todo-->
+      <h2>Todos</h2>
+      <form id="todo-form"> <!--Form where you can submit title, notes, due date, select priority, then submit.-->
+        <input type="text" id="todo-title" placeholder="Title" required />
+        <input type="text" id="todo-notes" placeholder="Notes" />
+        <input type="date" id="todo-dueDate" required />
+        <select id="todo-priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button type="submit">Add Todo</button>
+      </form>
+      <ul id="todo-list"></ul> <!--These todos will dynamically pop up when you add edit or delete-->
+    </section>
+
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
