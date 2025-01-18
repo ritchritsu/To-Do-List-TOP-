@@ -11,10 +11,17 @@ class ProjectManager {
         console.log(`Project "${projectName}" added.`);
     }
 
-    deleteProject(project) {
-        const index = this.projects.indexOf(project);
+    deleteProject(projectName) {{
+        
+        // const index = this.projects.indexOf(project); THIS DOESNT WORK BECAUSE FOR THE FUNCTION YOU ARE PASSING A NAME INSTEAD OF AN OBJECT
+        const index = this.projects.findIndex(project => projectName === project.projectName) //find the index of the project where projectName = project.projectName (findIndex finds the first thing that satisfies the condition)
         if (index !== -1) {
             this.projects.splice(index, 1);
+            console.log(`Project "${projectName}" deleted.`); 
+        }
+        else{
+            throw new Error(`Project "${projectName}" not found.`);
+        }
         }
     }
 }
@@ -141,5 +148,3 @@ class TodoItem {
     }
 }
 
-// Instantiate ProjectManager
-const projectManagerInstance = new ProjectManager(); //must be projectManagerInstance or other name since theres already a class named projectManager (INSTANCE NAME MUST BE DIFF FROM CLASS NAME)

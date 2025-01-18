@@ -1,8 +1,14 @@
 // gui.js
 
+
+// Instantiate ProjectManager
+const projectManagerInstance = new ProjectManager(); //must be projectManagerInstance or other name since theres already a class named projectManager (INSTANCE NAME MUST BE DIFF FROM CLASS NAME)
+
+
 document.addEventListener("DOMContentLoaded", (event) => { //once dom is loaded, run these functions
     addProjectGUI();
     updateProjectSelect();
+    deleteProjectGUI();
 });
 
 function addProjectGUI() {
@@ -20,16 +26,51 @@ function addProjectGUI() {
         }
     });
 }
-
+/*
 function deleteProjectGUI(){
-    
+     let deleteProjectButton = document.getElementById("delete-project-btn").addEventListener("click", (event) => { //IF YOU ARE PUSHING A BUTTON DOTN FORGET TO ADD THE EVENT LISTENER
+     let selectedProjectElement = document.getElementById("project-select").value; //get value of select element
+     projectManagerInstance.deleteProject(selectedProjectElement); //delete that project in the logic
+     updateProjectSelect(); // update the project select dropdown (which will loop over the projects again but with a deleted project)
+})
+} 
+
+THIS IS ALLLL WRONGGG 
+
+Issues in original code:
+Event listener was defined inside the function, causing it to add a new listener each time the function runs
+Used let instead of const for immutable references
+Chained the event listener directly to getElementById which doesn't store the button reference
+No error handling
+No validation for selected project
+*/
+// I FORGOT TO ADD EVENT LISTERNER TO THE BUTTON KANINA DONT FORGET
+
+function deleteProjectGUI() {
+    const deleteProjectButton = document.getElementById("delete-project-btn");
+
+    deleteProjectButton.addEventListener("click", () => {
+        const projectName = document.getElementById("project-select").value;
+        
+        if (!projectName) {
+            alert("Please select a project to delete");
+            return;
+        }
+
+        try {
+            projectManagerInstance.deleteProject(projectName);
+            updateProjectSelect();
+        } catch (error) {
+            alert(`Error deleting project: ${error.message}`);
+        }
+    });
 }
 
 function updateProjectSelect() {
     const projectSelectElement = document.getElementById("project-select"); // get project-select element
     
     // Clear existing options
-    projectSelect.innerHTML = '';
+    projectSelectElement.innerHTML = '';
 
     // Loop through all projects and add them to the dropdown
     projectManagerInstance.projects.forEach(project => { 
