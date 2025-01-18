@@ -47,23 +47,24 @@ No validation for selected project
 // I FORGOT TO ADD EVENT LISTERNER TO THE BUTTON KANINA DONT FORGET
 
 function deleteProjectGUI() {
-    const deleteProjectButton = document.getElementById("delete-project-btn");
+    const deleteProjectButton = document.getElementById("delete-project-btn"); //get the delete button
 
-    deleteProjectButton.addEventListener("click", () => {
-        const projectName = document.getElementById("project-select").value;
+    deleteProjectButton.addEventListener("click", () => { //give it an ear to hear clicks, then
+        const projectName = document.getElementById("project-select").value; //get the project name (from project-select.value)
         
-        if (!projectName) {
-            alert("Please select a project to delete");
+        if (!projectName) { //if no project selected then throw an alert
+            alert("Please select a project to delete"); 
             return;
         }
 
-        try {
+        try { //try deleting the project using the name
             projectManagerInstance.deleteProject(projectName);
-            updateProjectSelect();
-        } catch (error) {
+            updateProjectSelect(); //update the selections
+        } catch (error) { //else throw an error
             alert(`Error deleting project: ${error.message}`);
         }
     });
+
 }
 
 function updateProjectSelect() {
