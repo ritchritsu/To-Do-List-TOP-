@@ -1,6 +1,6 @@
 // gui.js
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", (event) => { //once dom is loaded, run these functions
     addProjectGUI();
     updateProjectSelect();
 });
@@ -9,10 +9,10 @@ function addProjectGUI() {
     let projectForm = document.getElementById("project-form").addEventListener("submit", (event) => { 
         event.preventDefault(); // prevent page reload on form submit
 
-        const projectName = document.getElementById("project-name").value; // get text value of projectName
+        const projectNameElement = document.getElementById("project-name").value; // get text value of projectName
 
-        if (projectName) { // if name is valid
-            projectManagerInstance.addProject(projectName);
+        if (projectNameElement) { // if name is valid
+            projectManagerInstance.addProject(projectNameElement);
             updateProjectSelect(); // update the project select dropdown
             document.getElementById("project-name").value = ''; // reset the input field
         } else {
@@ -21,8 +21,12 @@ function addProjectGUI() {
     });
 }
 
+function deleteProjectGUI(){
+    
+}
+
 function updateProjectSelect() {
-    const projectSelect = document.getElementById("project-select"); // get project-select element
+    const projectSelectElement = document.getElementById("project-select"); // get project-select element
     
     // Clear existing options
     projectSelect.innerHTML = '';
@@ -32,6 +36,6 @@ function updateProjectSelect() {
         const option = document.createElement("option"); // create a new option element
         option.value = project.projectName; // set the value of the option to the project name
         option.textContent = project.projectName; // set the text of the option to the project name
-        projectSelect.appendChild(option); // append it to project-select
+        projectSelectElement.appendChild(option); // append it to project-select
     });
 }
