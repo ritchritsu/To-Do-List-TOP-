@@ -3,12 +3,13 @@
 
 // Instantiate ProjectManager
 const projectManagerInstance = new ProjectManager(); //must be projectManagerInstance or other name since theres already a class named projectManager (INSTANCE NAME MUST BE DIFF FROM CLASS NAME)
-
+const projectInstance = new Project();
 
 document.addEventListener("DOMContentLoaded", (event) => { //once dom is loaded, run these functions
     addProjectGUI();
     updateProjectSelect();
     deleteProjectGUI();
+    addTodoGUI(); //gotta implement
 });
 
 function addProjectGUI() {
@@ -81,3 +82,27 @@ function updateProjectSelect() {
         projectSelectElement.appendChild(option); // append it to project-select
     });
 }
+
+function addTodoGUI(){
+    
+    const todoFormElement = document.getElementById("todo-form"); //get form
+    const todoListElement = document.getElementById("todo-list"); //get unordered list
+
+    todoFormElement.addEventListener("submit", (event) => { //on click
+        event.preventDefault(); //prevent refresh of page
+        const todoData = { //get form value
+            title: document.getElementById("todo-title").value,
+            notes: document.getElementById("todo-notes").value,
+            dueDate: document.getElementById("todo-dueDate").value,
+            priority: document.getElementById("todo-priority").value
+        };
+        projectInstance.addTodo(todoData); //add todoData to project manager instance
+        let todoDataElement = document.createElement("li"); //make a li element for the ul
+        todoDataElement.textContent = `${todoData.title} - ${todoData.dueDate} - ${todoData.priority}`; //li element has these values (placeholders makes it readable)
+        todoListElement.appendChild(todoDataElement); //append it to the list
+        todoFormElement.reset(); //clear the form
+    })
+
+}
+
+//need to do project saving
